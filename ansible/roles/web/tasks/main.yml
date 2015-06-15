@@ -1,0 +1,25 @@
+---
+# tasks file for web
+# - name: default php info file
+#   copy: src=index.php dest=/var/www/html/myinfo.php
+
+- name: setup sampleuser
+  user: name=sampleuser
+
+- name: install git
+  apt: name=git
+
+- name: create dir for app
+  file: path=/var/www/html/2015-devops state=directory owner=sampleuser
+
+- name: checkout the app code
+  git: repo=https://github.com/mance2012/2015-devops.git dest=/var/www/html/2015-devops
+  become_user: sampleuser
+
+# - name: install app dependencies
+#   command: php composer.phar install chdir=/var/www/html/2015-devops
+#   become_user: sampleuser
+
+- name: db migration
+  command: php vendor/bin/phinx migrate -e production chdir=/var/www/html/2015-devops
+  become_user: sampleuser

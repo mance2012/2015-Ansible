@@ -1,0 +1,12 @@
+---
+# defaults file for db
+mysql_root_password: 123456
+mysql_databases:
+ - name: opencfp
+   encoding: latin1
+   collation: latin1_general_ci
+mysql_users:
+  - name: sampleuser
+    host: "%"
+    password: '123456'
+    priv: "opencfp.*:ALL"
