@@ -15,10 +15,6 @@
 - name: checkout the app code
   git: repo=https://github.com/mance2012/2015-devops.git dest=/var/www/html/2015-devops
   become_user: sampleuser
-  
-- name: install composer.phar
-  command: curl -sS https://getcomposer.org/installer | php chdir=/var/www/html/2015-devops
-  become_user: sameuser
 
 - name: install app dependencies
   command: php composer.phar install chdir=/var/www/html/2015-devops
